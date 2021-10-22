@@ -8,19 +8,15 @@ class Task < ApplicationRecord
 
   state_machine :state, initial: :new_task do
     event :develop do
-      transition new_task: :in_development
+      transition [:new_task, :in_qa, :in_code_review] => :in_development
     end
 
     event :archive do
       transition [:new_task, :released] => :archived
     end
 
-    event :in_qa do
+    event :qa_check do
       transition in_development: :in_qa
-    end
-
-    event :make_bug_fixes do
-      transition in_qa: :in_development
     end
 
     event :review_code do
@@ -29,10 +25,6 @@ class Task < ApplicationRecord
 
     event :ready_for_release do
       transition in_code_review: :ready_for_release
-    end
-
-    event :make_code_fixes do
-      transition in_code_review: :in_development
     end
 
     event :release do
