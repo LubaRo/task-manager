@@ -8,12 +8,12 @@ class Web::SessionsControllerTest < ActionController::TestCase
 
   test 'should post create' do
     password = generate(:string)
-    user = create(:user, { password: password})
+    user = create(:user, { password: password })
     attrs = {
       email: user.email,
-      password: password
+      password: password,
     }
-    post :create, params: { session_form: attrs}
+    post :create, params: { session_form: attrs }
     assert_response :redirect
   end
 
