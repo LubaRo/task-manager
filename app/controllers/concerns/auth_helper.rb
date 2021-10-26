@@ -7,7 +7,7 @@ module AuthHelper
     session[:user_id] = nil
   end
 
-  def signed_out?
+  def signed_in?
     current_user.present?
   end
 
