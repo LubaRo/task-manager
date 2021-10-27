@@ -44,12 +44,12 @@ class Api::V1::TasksControllerTest < ActionController::TestCase
     assert_equal task.slice(*task_attributes.keys), task_attributes
   end
 
-  # test 'sould delete destroy' do
-  #   author = create :user
-  #   task = create :task, author: author
-  #   delete :destroy, params: { id: task.id, format: :json }
-  #   assert_response :success
+  test 'sould delete destroy' do
+    author = create(:user)
+    task = create(:task, author: author)
+    delete :destroy, params: { id: task.id, format: :json }
+    assert_response :success
 
-  #   assert !Task.where(id: task.id).exists?
-  # end
+    assert !Task.where(id: task.id).exists?
+  end
 end
