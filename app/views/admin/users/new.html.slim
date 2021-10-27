@@ -1,1 +1,2 @@
-= render partial: 'admin/shared/user_form', locals: {user: @user, form_url: admin_users_path(@user), title: 'Create new user', back_url: admin_users_url}
+h4 Create new user
+= render 'form', url: admin_users_path(@user)

@@ -1,1 +1,2 @@
-= render partial: 'admin/shared/user_form', locals: {user: @user, form_url: admin_user_path(@user), title: 'Edit user', back_url: admin_users_url}
+h4 Edit user
+= render 'form', url: admin_user_path(@user)
