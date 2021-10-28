@@ -22,4 +22,10 @@ lint:
 lint-fix:
 	docker-compose run --rm web bash -c 'bundle exec rubocop -a'
 
+js-lint:
+	docker-compose run --rm web bash -c 'yarn lint'
+
+js-lint-fix:
+	docker-compose run --rm web bash -c 'yarn lint --fix'
+
 .PHONY: all test clean
