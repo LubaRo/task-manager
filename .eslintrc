@@ -18,9 +18,11 @@
 
   "settings": {
     "import/extensions": [".js", ".jsx"],
+    
   },
 
   "rules": {
+    "max-len": [2, 120],
     "prettier/prettier": [ 2 , {
       "singleQuote": true,
       "trailingComma": "all",
@@ -43,6 +45,6 @@
     "react/prop-types": [2, { "ignore": ["classes", "match", "dictionaries", "errors", "history", "children", "location"] }],
     "no-debugger": 1,
     "react/destructuring-assignment": 0,
-    "react/static-property-placement": 0
+    "react/static-property-placement": 0,
   }
 }
