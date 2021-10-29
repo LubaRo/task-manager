@@ -28,4 +28,7 @@ js-lint:
 js-lint-fix:
 	docker-compose run --rm web bash -c 'yarn lint --fix'
 
+build-frontend:
+	docker-compose run --rm web bash -c "./bin/webpack  --progress"
+
 .PHONY: all test clean
