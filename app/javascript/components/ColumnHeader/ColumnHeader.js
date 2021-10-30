@@ -26,7 +26,7 @@ const ColumnHeader = ({ column, onLoadMore }) => {
         <b>{title}</b> ({count}/{totalCount || '…'})
       </div>
       <div className={styles.actions}>
-        <IconButton aria-label="Load more" onClick={() => handleLoadMore()}>
+        <IconButton aria-label="Load more" onClick={() => handleLoadMore()} hidden={count >= totalCount}>
           <SystemUpdateAltIcon fontSize="small" />
         </IconButton>
       </div>
