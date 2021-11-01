@@ -5,13 +5,33 @@ import { has } from 'ramda';
 import TextField from '@material-ui/core/TextField';
 
 import useStyles from './useStyles';
+import UserSelect from 'components/UserSelect';
 
 const Form = ({ errors, onChange, task }) => {
   const handleChangeTextField = (fieldName) => (event) => onChange({ ...task, [fieldName]: event.target.value });
+  const handleChangeSelect = (fieldName) => (user) => onChange({ ...task, [fieldName]: user });
   const styles = useStyles();
 
   return (
     <form className={styles.root}>
+      <UserSelect
+        label="Author"
+        value={task.author}
+        onChange={handleChangeSelect('author')}
+        isDisabled={false}
+        isRequired
+        error={has('author', errors)}
+        helperText={errors.author}
+      />
+      <UserSelect
+        label="Assignee"
+        value={task.assignee}
+        onChange={handleChangeSelect('assignee')}
+        isDisabled={false}
+        isRequired
+        error={has('assignee', errors)}
+        helperText={errors.assignee}
+      />
       <TextField
         error={has('name', errors)}
         helperText={errors.name}
