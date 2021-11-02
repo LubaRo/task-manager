@@ -8,9 +8,9 @@ import useStyles from './useStyles';
 import Task from 'components/Task';
 import TasksRepository from 'repositories/TasksRepository';
 import ColumnHeader from 'components/ColumnHeader';
-import AddPopup from 'components/AddPopup/AddPopup';
+import AddPopup from 'components/AddPopup';
 import TaskForm from 'forms/TaskForm';
-import EditPopup from 'components/EditPopup/EditPopup';
+import EditPopup from 'components/EditPopup';
 
 const STATES = [
   { key: 'new_task', value: 'New' },
