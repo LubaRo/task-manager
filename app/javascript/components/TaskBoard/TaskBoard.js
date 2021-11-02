@@ -8,9 +8,9 @@ import useStyles from './useStyles';
 import Task from 'components/Task';
 import TasksRepository from 'repositories/TasksRepository';
 import ColumnHeader from 'components/ColumnHeader';
-import AddPopup from 'components/AddPopup/AddPopup';
+import AddPopup from 'components/AddPopup';
 import TaskForm from 'forms/TaskForm';
-import EditPopup from 'components/EditPopup/EditPopup';
+import EditPopup from 'components/EditPopup';
 import TaskPresenter from 'presenters/TaskPresenter';
 
 const STATES = [
@@ -65,10 +65,10 @@ const TaskBoard = () => {
   const loadColumnMore = (state, page = 1, perPage = 10) => {
     loadColumn(state, page, perPage).then(({ data }) => {
       setBoardCards((prevState) => {
-        const currentStateCards = prevState[state].cards.concat(data.items);
+        const newStateCards = prevState[state].cards.concat(data.items);
         return {
           ...prevState,
-          [state]: { cards: currentStateCards, meta: data.meta },
+          [state]: { cards: newStateCards, meta: data.meta },
         };
       });
     });
@@ -120,10 +120,7 @@ const TaskBoard = () => {
   const handleTaskCreate = (params) => {
     const attributes = TaskForm.attributesToSubmit(params);
     return TasksRepository.create(attributes).then(({ data: { task } }) => {
-      if (TaskPresenter.id(task)) {
-        loadColumnInitial(TaskPresenter.state(task));
-      }
-
+      loadColumnInitial(task.state);
       handleClose();
     });
   };

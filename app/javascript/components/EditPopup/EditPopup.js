@@ -80,7 +80,7 @@ const EditPopup = ({ cardId, onClose, onCardDestroy, onLoadCard, onCardUpdate })
             onClick={handleCardUpdate}
             size="small"
             variant="contained"
-            color="primary" // prettier cuts line breaks if word 'primary' exists
+            color="primary"
           >
             Update
           </Button>
