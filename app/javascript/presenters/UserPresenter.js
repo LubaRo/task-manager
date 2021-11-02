@@ -8,9 +8,6 @@ export default new PropTypesPresenter(
     lastName: PropTypes.string,
   },
   {
-    id(user) {
-      return user.id;
-    },
     fullName(user) {
       return `${this.firstName(user)} ${this.lastName(user)}`;
     },
