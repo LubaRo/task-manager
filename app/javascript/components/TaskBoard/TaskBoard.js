@@ -119,10 +119,7 @@ const TaskBoard = () => {
   const handleTaskCreate = (params) => {
     const attributes = TaskForm.attributesToSubmit(params);
     return TasksRepository.create(attributes).then(({ data: { task } }) => {
-      if (task.id) {
-        loadColumnInitial(task.state);
-      }
-
+      loadColumnInitial(task.state);
       handleClose();
     });
   };
