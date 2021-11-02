@@ -6,7 +6,7 @@ class Api::V1::TasksController < Api::V1::ApplicationController
       page(page).
       per(per_page)
 
-    respond_with(tasks, each_serializer: TaskSerializer, root: 'items', mete: build_meta(tasks))
+    respond_with(tasks, each_serializer: TaskSerializer, root: 'items', meta: build_meta(tasks))
   end
 
   def show
@@ -39,6 +39,6 @@ class Api::V1::TasksController < Api::V1::ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:name, :description, :author_id, :assignee_id, :state, :expired_at)
+    params.require(:task).permit(:name, :description, :author_id, :assignee_id, :state, :expired_at, :state_event)
   end
 end

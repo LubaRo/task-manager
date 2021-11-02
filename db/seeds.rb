@@ -18,3 +18,22 @@ admin.save
   u.password = "#{i}"
   u.save
 end
+
+task_statuses = [:new_task, :in_development, :in_qa, :in_code_review, :ready_for_release, :released, :archived]
+
+author = Manager.new(email: 'manager@test.com', first_name: 'manager', last_name: 'first', password: '123')
+author.save
+
+assignee = Developer.new(email: 'developer@test.com', first_name: 'developer', last_name: 'first', password: '123')
+assignee.save
+
+40.times do |i|
+  t = Task.new
+  t.name = "Task_#{i}"
+  t.description = "Description #{i}"
+  t.author = author
+  t.assignee = assignee
+  t.state = task_statuses.sample
+  t.expired_at = Time.at(i.day.seconds.to_i + Time.now.to_i).to_date
+  t.save
+end
