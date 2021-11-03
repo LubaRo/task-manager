@@ -148,7 +148,7 @@ const TaskBoard = () => {
   };
 
   return (
-    <div>
+    <>
       <KanbanBoard
         renderCard={(card) => <Task onClick={handleOpenEditPopup} task={card} />}
         renderColumnHeader={(column) => <ColumnHeader column={column} onLoadMore={loadColumnMore} />}
@@ -169,7 +169,7 @@ const TaskBoard = () => {
           cardId={openedTaskId}
         />
       )}
-    </div>
+    </>
   );
 };
 
