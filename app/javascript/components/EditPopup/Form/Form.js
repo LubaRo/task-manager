@@ -19,7 +19,7 @@ const Form = ({ errors, onChange, task }) => {
         label="Author"
         value={TaskPresenter.author(task)}
         onChange={handleChangeSelect('author')}
-        isDisabled={false}
+        isDisabled
         isRequired
         error={has('author', errors)}
         helperText={errors.author}
