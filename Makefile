@@ -31,4 +31,7 @@ js-lint-fix:
 build-frontend:
 	docker-compose run --rm web bash -c "./bin/webpack  --progress"
 
+gen-js-routes:
+	docker-compose run --rm web bash -c "rails js_routes:generate"
+
 .PHONY: all test clean
