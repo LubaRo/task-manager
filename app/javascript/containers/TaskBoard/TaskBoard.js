@@ -21,7 +21,7 @@ const MODES = {
 const TaskBoard = () => {
   const styles = useStyles();
 
-  const { board, loadBoard, loadColumnMore, updateTaskState, loadTaskData, updateTask, createTask, destroyTask } =
+  const { board, loadBoard, loadColumnMore, updateTaskState, loadTask, updateTask, createTask, destroyTask } =
     useTasks();
 
   const [mode, setMode] = useState(MODES.NONE);
@@ -47,10 +47,9 @@ const TaskBoard = () => {
 
   const handleLoadColumnMore = (taskStatus, page = 1) => loadColumnMore(taskStatus, page);
 
-  const handleCardDragEnd = (task, source, destination) =>
-    updateTaskState(task, source.fromColumnId, destination.toColumnId);
+  const handleCardDragEnd = (task, source, destination) => updateTaskState(task, source, destination);
 
-  const handleTaskLoad = (taskId) => loadTaskData(taskId);
+  const handleTaskLoad = (taskId) => loadTask(taskId);
 
   const handleTaskUpdate = (task) => {
     const attributes = TaskForm.attributesToSubmit(task);

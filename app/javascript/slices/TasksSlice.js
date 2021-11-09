@@ -69,15 +69,15 @@ export const useTasksActions = () => {
       dispatch(loadColumnMoreSuccess({ ...data, columnId: taskState }));
     });
 
-  const updateTaskState = (task, stateFrom, stateTo) => {
-    const transition = TaskPresenter.transitions(task).find(({ to }) => stateTo === to);
+  const updateTaskState = (task, source, destination) => {
+    const transition = TaskPresenter.transitions(task).find(({ to }) => destination.toColumnId === to);
     if (!transition) {
       return null;
     }
 
     return TasksRepository.update(task.id, { stateEvent: transition.event }).then(() => {
-      loadColumn(stateTo);
-      loadColumn(stateFrom);
+      loadColumn(destination.toColumnId);
+      loadColumn(source.fromColumnId);
     });
   };
 
@@ -91,7 +91,7 @@ export const useTasksActions = () => {
       loadColumn(TaskPresenter.state(task));
     });
 
-  const loadTaskData = (taskId) => TasksRepository.show(taskId).then(({ data: { task } }) => task);
+  const loadTask = (taskId) => TasksRepository.show(taskId).then(({ data: { task } }) => task);
 
   const destroyTask = (task) =>
     TasksRepository.destroy(task.id).then(() => {
@@ -104,7 +104,7 @@ export const useTasksActions = () => {
     loadBoard,
     updateTaskState,
     loadColumnMore,
-    loadTaskData,
+    loadTask,
     updateTask,
     createTask,
     destroyTask,
