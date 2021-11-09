@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 
 import store from 'store';
-import TaskBoard from 'components/TaskBoard';
+import TaskBoard from 'containers/TaskBoard';
 
 const theme = createTheme();
 

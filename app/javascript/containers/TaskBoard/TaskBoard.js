@@ -14,6 +14,7 @@ import useStyles from './useStyles';
 
 const MODES = {
   ADD: 'add',
+  EDIT: 'edit',
   NONE: 'none',
 };
 
