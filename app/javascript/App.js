@@ -1,12 +1,17 @@
 import React from 'react';
 import { Provider } from 'react-redux';
+import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 
 import store from 'store';
 import TaskBoard from 'components/TaskBoard';
 
+const theme = createTheme();
+
 const App = () => (
   <Provider store={store}>
-    <TaskBoard />
+    <ThemeProvider theme={theme}>
+      <TaskBoard />
+    </ThemeProvider>
   </Provider>
 );
 
