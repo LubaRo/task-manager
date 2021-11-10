@@ -24,10 +24,12 @@ jobs:
         with:
           name: artifact
           path: ${{ github.workspace }}/zz-dir
-      - name: List files in the repository
+      - name: ls ./app/
         run: ls ${{ github.workspace }}/app/
-      - name: List files in the repository
+      - name: ls app root
         run: ls ${{ github.workspace }}
+      - name: ls /app/
+        run: ls /app/
       - name: Pwd
         run: pwd
       - name: Coveralls
