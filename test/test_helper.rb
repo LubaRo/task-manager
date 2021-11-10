@@ -5,8 +5,11 @@ require 'simplecov'
 require 'simplecov-lcov'
 
 SimpleCov::Formatter::LcovFormatter.config.report_with_single_file = true
+SimpleCov::Formatter::LcovFormatter.config do |c|
+  c.lcov_file_name = 'lcov.info'
+end
 SimpleCov.formatter = SimpleCov::Formatter::LcovFormatter
-SimpleCov.start 'rails'
+SimpleCov.start('rails')
 
 class ActiveSupport::TestCase
   # Run tests in parallel with specified workers
