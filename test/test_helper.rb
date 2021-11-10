@@ -7,6 +7,7 @@ require 'simplecov-lcov'
 SimpleCov::Formatter::LcovFormatter.config.report_with_single_file = true
 SimpleCov::Formatter::LcovFormatter.config do |c|
   c.lcov_file_name = 'lcov.info'
+  c.single_report_path = 'coverage/lcov.info'
 end
 SimpleCov.formatter = SimpleCov::Formatter::LcovFormatter
 SimpleCov.start('rails')
