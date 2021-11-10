@@ -28,8 +28,12 @@ jobs:
         run: ls ${{ github.workspace }}/app/
       - name: ls app root
         run: ls ${{ github.workspace }}
-      - name: ls /app/
-        run: ls /app/
+      - name: ls ./../
+        run: ls ./../
+      - name: ls ./../../
+        run: ls ./../../
+      - name: ls /
+        run: ls /
       - name: Pwd
         run: pwd
       - name: Coveralls
