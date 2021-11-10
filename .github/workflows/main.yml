@@ -22,10 +22,12 @@ jobs:
         uses: actions/upload-artifact@master
         if: always()
         with:
-          name: coverage-report
-          path: ${{ github.workspace }}/coverage
+          name: artifact
+          path: ${{ github.workspace }}/zz-dir
       - name: List files in the repository
-        run: ls
+        run: ls ${{ github.workspace }}/app/
+      - name: List files in the repository
+        run: ls ${{ github.workspace }}
       - name: Pwd
         run: pwd
       - name: Coveralls

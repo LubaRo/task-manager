@@ -12,6 +12,10 @@ end
 SimpleCov.formatter = SimpleCov::Formatter::LcovFormatter
 SimpleCov.start('rails')
 
+dir = Rails.root.join('zz-dir', '403.html')
+puts dir
+FileUtils.mkdir_p(dir) unless File.directory?(dir)
+
 class ActiveSupport::TestCase
   # Run tests in parallel with specified workers
   parallelize(workers: :number_of_processors)
