@@ -17,27 +17,27 @@ jobs:
         env:
           COVERAGE: true
           RAILS_ENV: test
-        run: docker-compose --file docker-compose.ci.yml run ci
-      - name: Upload coverage results
-        uses: actions/upload-artifact@master
-        if: always()
-        with:
-          name: artifact
-          path: ${{ github.workspace }}/zz-dir
-      - name: ls ./app/
-        run: ls ${{ github.workspace }}/app/
-      - name: ls app root
-        run: ls ${{ github.workspace }}
-      - name: ls ./../
-        run: ls ./../
-      - name: ls ./../../
-        run: ls ./../../
-      - name: ls /
-        run: ls /
-      - name: Pwd
-        run: pwd
-      - name: Coveralls
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.github_token }}
-          path-to-lcov: ${{ github.workspace }}/coverage/lcov.info
+        run: docker-compose --file docker-compose.ci.yml up -d --build
+    - name: Install webpacker
+      run: bundle exec rails webpacker:install
+
+    - name: Stop containers
+      if: always()
+      run: docker-compose --file docker-compose.ci.yml down
+      # - name: ls ./app/
+      #   run: ls ${{ github.workspace }}/app/
+      # - name: ls app root
+      #   run: ls ${{ github.workspace }}
+      # - name: ls ./../
+      #   run: ls ./../
+      # - name: ls ./../../
+      #   run: ls ./../../
+      # - name: ls /
+      #   run: ls /
+      # - name: Pwd
+      #   run: pwd
+      # - name: Coveralls
+      #   uses: coverallsapp/github-action@master
+      #   with:
+      #     github-token: ${{ secrets.github_token }}
+      #     path-to-lcov: ${{ github.workspace }}/coverage/lcov.info
