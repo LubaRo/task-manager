@@ -17,7 +17,7 @@ jobs:
         env:
           COVERAGE: true
           RAILS_ENV: test
-        run: docker-compose --file docker-compose.ci.yml up -d --build
+        run: docker-compose -f "docker-compose.ci.yml" up -d --build
     - name: Install webpacker
       run: bundle exec rails webpacker:install
     - name: Stop containers
