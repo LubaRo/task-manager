@@ -17,13 +17,13 @@ jobs:
         env:
           COVERAGE: true
           RAILS_ENV: test
-        run: docker-compose --file docker-compose.ci.yml run ci
+        run: docker-compose --file docker-compose.ci.yml run ci | ls
       - name: Upload coverage results
         uses: actions/upload-artifact@master
         if: always()
         with:
           name: coverage-report
-          path: coverage
+          path: ${{ github.workspace }}/coverage
       - name: List files in the repository
         run: ls ${{ github.workspace }}
       - name: Coveralls
