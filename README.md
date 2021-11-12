@@ -6,6 +6,9 @@
 [![Coverage Status](https://coveralls.io/repos/github/LubaRo/task-manager/badge.svg?branch=develop)](https://coveralls.io/github/LubaRo/task-manager?branch=develop)
 
 
+See it in action: https://task-manager-ror-app.herokuapp.com/
+
+
 ## Build the project
 
 ```
