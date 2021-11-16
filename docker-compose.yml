@@ -23,7 +23,8 @@ services:
       GEM_PATH: /bundle_cache
       RAILS_PORT: 3000
       RUBYOPT: -W:no-deprecated -W:no-experimental
-      ROLLBAR_ACCESS_TOKEN: fake
+      ROLLBAR_ACCESS_TOKEN: ${ROLLBAR_ACCESS_TOKEN}
+      NEWRELIC_LICENSE_KEY: ${NEWRELIC_LICENSE_KEY}
     command: bundle exec rails s -b '0.0.0.0' -p 3000
 
   db:
