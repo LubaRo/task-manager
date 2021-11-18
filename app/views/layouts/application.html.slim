@@ -32,7 +32,9 @@ html lang="en"
 
     main#main.mdl-layout__content
       .page-content
-        = yield
+        = render 'shared/alerts'
+        div
+          = yield
     footer#footer.mdl-mini-footer
       .mdl-mini-footer__left-section
         .mdl-logo
