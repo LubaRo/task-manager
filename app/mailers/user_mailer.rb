@@ -21,4 +21,11 @@ class UserMailer < ApplicationMailer
 
     mail(to: user.email, subject: 'Task Deleted')
   end
+
+  def reset_password
+    user = params[:user]
+    @token = user.generate_password_token!
+
+    mail(to: user.email, subject: 'Password reset')
+  end
 end
