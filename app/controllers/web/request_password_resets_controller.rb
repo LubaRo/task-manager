@@ -7,7 +7,7 @@ class Web::RequestPasswordResetsController < Web::ApplicationController
     @request_password_reset_form = RequestPasswordResetForm.new(request_params)
 
     if @request_password_reset_form.valid?
-      UserMailer.with({ user: @request_password_reset_form.user }).reset_password.deliver_now
+      UserMailer.with({ user: @request_password_reset_form.user }).reset_password.deliver_later
       flash_message = "A password reset link was sent to #{request_params[:email]}."
       redirect_to(:new_session, flash: { success: flash_message })
     else
