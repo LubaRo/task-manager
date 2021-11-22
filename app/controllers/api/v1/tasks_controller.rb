@@ -39,7 +39,7 @@ class Api::V1::TasksController < Api::V1::ApplicationController
     task = Task.find(params[:id])
 
     if task.destroy
-      UserMailer.with({ user: task.author, task: task }).task_deleted.deliver_later
+      UserMailer.with({ user: task.author, task_id: task.id }).task_deleted.deliver_later
     end
 
     respond_with(task)
