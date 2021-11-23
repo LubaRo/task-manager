@@ -15,4 +15,5 @@ services:
       - DATABASE_HOST=db
       - DATABASE_USERNAME=postgres
       - CI=true
+      - DEFAULT_HOST=test.host.com
     command: sh -c "bundle exec rails webpacker:install && bundle exec rails db:create db:migrate && bundle exec rake test"

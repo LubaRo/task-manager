@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+
   root :to => "web/boards#show"
 
   scope module: :web do
@@ -6,6 +8,9 @@ Rails.application.routes.draw do
     resource :session, only: [:new, :create, :destroy]
 
     resources :developers, only: [:new, :create]
+
+    resource :request_password_reset, only: [:new, :create]
+    resource :reset_password, only: [:new, :create]
   end
 
   namespace :admin do

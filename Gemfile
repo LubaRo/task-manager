@@ -44,6 +44,8 @@ group :development do
   gem 'rack-mini-profiler', '~> 2.0'
   gem 'listen', '~> 3.3'
   gem 'bullet', '~> 6.1', '>= 6.1.5'
+  gem 'letter_opener', '~> 1.7'
+  gem 'letter_opener_web', '~> 2.0'
 end
 
 group :test do
