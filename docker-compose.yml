@@ -29,6 +29,7 @@ services:
       ROLLBAR_ACCESS_TOKEN: ${ROLLBAR_ACCESS_TOKEN}
       NEWRELIC_LICENSE_KEY: ${NEWRELIC_LICENSE_KEY}
       DEFAULT_HOST: ${DEFAULT_HOST}
+      DEFAULT_PORT: ${DEFAULT_PORT}
     command: bundle exec rails s -b '0.0.0.0' -p 3000
 
   db:
