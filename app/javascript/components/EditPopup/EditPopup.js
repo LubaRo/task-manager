@@ -16,7 +16,15 @@ import useStyles from './useStyles';
 import Form from 'components/EditPopup/Form';
 import TaskPresenter from 'presenters/TaskPresenter';
 
-const EditPopup = ({ cardId, onClose, onCardDestroy, onLoadCard, onCardUpdate }) => {
+const EditPopup = ({
+  cardId,
+  onClose,
+  onCardDestroy,
+  onLoadCard,
+  onCardUpdate,
+  onCardImageAttach,
+  onCardImageRemove,
+}) => {
   const [task, setTask] = useState(null);
   const [isSaving, setSaving] = useState(false);
   const [errors, setErrors] = useState({});
@@ -71,7 +79,13 @@ const EditPopup = ({ cardId, onClose, onCardDestroy, onLoadCard, onCardUpdate })
               <CircularProgress />
             </div>
           ) : (
-            <Form errors={errors} onChange={setTask} task={task} />
+            <Form
+              errors={errors}
+              onChange={setTask}
+              task={task}
+              onCardImageAttach={onCardImageAttach}
+              onCardImageRemove={onCardImageRemove}
+            />
           )}
         </CardContent>
         <CardActions className={styles.actions}>
@@ -105,6 +119,8 @@ EditPopup.propTypes = {
   onCardDestroy: PropTypes.func.isRequired,
   onLoadCard: PropTypes.func.isRequired,
   onCardUpdate: PropTypes.func.isRequired,
+  onCardImageAttach: PropTypes.func.isRequired,
+  onCardImageRemove: PropTypes.func.isRequired,
 };
 
 export default EditPopup;

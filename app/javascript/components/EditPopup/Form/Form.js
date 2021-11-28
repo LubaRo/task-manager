@@ -1,16 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { has } from 'ramda';
-
 import TextField from '@material-ui/core/TextField';
 
-import useStyles from './useStyles';
-import UserSelect from 'components/UserSelect';
 import TaskPresenter from 'presenters/TaskPresenter';
+import UserSelect from 'components/UserSelect';
+import TaskImageField from './TaskImageField';
+import useStyles from './useStyles';
 
-const Form = ({ errors, onChange, task }) => {
+const Form = ({ errors, onChange, task, onCardImageAttach, onCardImageRemove }) => {
   const handleChangeTextField = (fieldName) => (event) => onChange({ ...task, [fieldName]: event.target.value });
   const handleChangeSelect = (fieldName) => (user) => onChange({ ...task, [fieldName]: user });
+  const handleImageChange = (imageUrl) => onChange({ ...task, imageUrl });
+
+  const handleImageAttach = (params) =>
+    onCardImageAttach(task, params)
+      .then(({ data }) => {
+        const imageUrl = data.task.imageUrl ?? null;
+        handleImageChange(imageUrl);
+      })
+      .catch((e) => alert(`Unable to save image! Error: ${e}`));
+
+  const handleImageRemove = () =>
+    onCardImageRemove(task)
+      .then(() => handleImageChange(null))
+      .catch((e) => alert(`Unable to remove image! Error: ${e}`));
+
   const styles = useStyles();
 
   return (
@@ -52,19 +67,22 @@ const Form = ({ errors, onChange, task }) => {
         multiline
         margin="dense"
       />
+      <TaskImageField task={task} onImageSave={handleImageAttach} onImageRemove={handleImageRemove} />
     </form>
   );
 };
 
 Form.propTypes = {
   onChange: PropTypes.func.isRequired,
-  task: PropTypes.shape().isRequired,
+  task: TaskPresenter.shape().isRequired,
   errors: PropTypes.shape({
     name: PropTypes.arrayOf(PropTypes.string),
     description: PropTypes.arrayOf(PropTypes.string),
     author: PropTypes.arrayOf(PropTypes.string),
     assignee: PropTypes.arrayOf(PropTypes.string),
   }),
+  onCardImageAttach: PropTypes.func.isRequired,
+  onCardImageRemove: PropTypes.func.isRequired,
 };
 
 Form.defaultProps = {
