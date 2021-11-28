@@ -86,6 +86,9 @@ export const useTasksActions = () => {
       loadColumn(TaskPresenter.state(task));
     });
 
+  const attachTaskImage = (task, params) => TasksRepository.uploadImage(task.id, params);
+  const removeTaskImage = (task) => TasksRepository.deleteImage(task.id);
+
   const createTask = (params) =>
     TasksRepository.create(params).then(({ data: { task } }) => {
       loadColumn(TaskPresenter.state(task));
@@ -108,6 +111,8 @@ export const useTasksActions = () => {
     updateTask,
     createTask,
     destroyTask,
+    attachTaskImage,
+    removeTaskImage,
   };
 };
 
