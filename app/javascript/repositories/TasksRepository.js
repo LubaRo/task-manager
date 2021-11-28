@@ -1,4 +1,4 @@
-import { apiV1TaskPath, apiV1TasksPath } from 'routes/ApiRoutes';
+import { apiV1TaskPath, apiV1TasksPath, apiV1TaskImagePath } from 'routes/ApiRoutes';
 import FetchHelper from 'utils/fetchHelper';
 
 export default {
@@ -24,6 +24,16 @@ export default {
 
   destroy(id) {
     const path = apiV1TaskPath(id);
+    return FetchHelper.delete(path);
+  },
+
+  uploadImage(taskId, attachment) {
+    const path = apiV1TaskImagePath(taskId);
+    return FetchHelper.putFormData(path, attachment);
+  },
+
+  deleteImage(taskId) {
+    const path = apiV1TaskImagePath(taskId);
     return FetchHelper.delete(path);
   },
 };
