@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { has } from 'ramda';
 import TextField from '@material-ui/core/TextField';
+
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import TaskPresenter from 'presenters/TaskPresenter';
 import UserSelect from 'components/UserSelect';
@@ -9,22 +11,39 @@ import TaskImageField from './TaskImageField';
 import useStyles from './useStyles';
 
 const Form = ({ errors, onChange, task, onCardImageAttach, onCardImageRemove }) => {
+  const [isImageLoading, changeIsImageLoading] = useState(false);
+
   const handleChangeTextField = (fieldName) => (event) => onChange({ ...task, [fieldName]: event.target.value });
   const handleChangeSelect = (fieldName) => (user) => onChange({ ...task, [fieldName]: user });
-  const handleImageChange = (imageUrl) => onChange({ ...task, imageUrl });
+  const handleImageChange = (imageUrl) => {
+    changeIsImageLoading(false);
+    onChange({ ...task, imageUrl });
+  };
 
-  const handleImageAttach = (params) =>
-    onCardImageAttach(task, params)
+  const handleImageAttach = (params) => {
+    changeIsImageLoading(true);
+
+    return onCardImageAttach(task, params)
       .then(({ data }) => {
         const imageUrl = data.task.imageUrl ?? null;
         handleImageChange(imageUrl);
       })
-      .catch((e) => alert(`Unable to save image! Error: ${e}`));
+      .catch((e) => {
+        changeIsImageLoading(false);
+        alert(`Unable to save image! Error: ${e}`);
+      });
+  };
 
-  const handleImageRemove = () =>
-    onCardImageRemove(task)
+  const handleImageRemove = () => {
+    changeIsImageLoading(true);
+
+    return onCardImageRemove(task)
       .then(() => handleImageChange(null))
-      .catch((e) => alert(`Unable to remove image! Error: ${e}`));
+      .catch((e) => {
+        changeIsImageLoading(false);
+        alert(`Unable to remove image! Error: ${e}`);
+      });
+  };
 
   const styles = useStyles();
 
@@ -67,7 +86,11 @@ const Form = ({ errors, onChange, task, onCardImageAttach, onCardImageRemove }) 
         multiline
         margin="dense"
       />
-      <TaskImageField task={task} onImageSave={handleImageAttach} onImageRemove={handleImageRemove} />
+      {isImageLoading ? (
+        <CircularProgress />
+      ) : (
+        <TaskImageField task={task} onImageSave={handleImageAttach} onImageRemove={handleImageRemove} />
+      )}
     </form>
   );
 };
