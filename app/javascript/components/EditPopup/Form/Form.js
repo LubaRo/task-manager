@@ -16,8 +16,8 @@ const Form = ({ errors, onChange, task, onCardImageAttach, onCardImageRemove }) 
   const handleChangeTextField = (fieldName) => (event) => onChange({ ...task, [fieldName]: event.target.value });
   const handleChangeSelect = (fieldName) => (user) => onChange({ ...task, [fieldName]: user });
   const handleImageChange = (imageUrl) => {
-    changeIsImageLoading(false);
     onChange({ ...task, imageUrl });
+    changeIsImageLoading(false);
   };
 
   const handleImageAttach = (params) => {
