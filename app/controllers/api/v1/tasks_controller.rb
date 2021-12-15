@@ -1,6 +1,7 @@
 class Api::V1::TasksController < Api::V1::ApplicationController
   def index
     tasks = Task.includes([:assignee, :author]).
+      with_attached_image.
       ransack(ransack_params).
       result.
       page(page).
@@ -10,7 +11,7 @@ class Api::V1::TasksController < Api::V1::ApplicationController
   end
 
   def show
-    task = Task.find(params[:id])
+    task = Task.with_attached_image.find(params[:id])
 
     respond_with(task, serializer: TaskSerializer)
   end
